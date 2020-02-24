@@ -141,6 +141,52 @@ public class EjerciciosNivel01Java {
             return error;
         }
     }
+    public void imprimeMes(int dia){
+        if (dia > 0 && dia <= 7){
+            int contador = 0;
+            for (int i = 1; i < dia; i++){
+                    System.out.print("XX ");
+                    contador = contador + 1;
+            }
+            for (int j = 1; j <= 31; j++){
+                if(contador < 7){
+                    if(j < 10){
+                        System.out.print("0" + j + " ");//añade 0 inicial en los valores inferiores a 10
+                        contador += 1;
+                    }
+                    else{
+                        System.out.print(j + " ");
+                        contador += 1;
+                    }
+                }
+                if (contador >= 7){
+                    System.out.println("");//añade salto de linea cuando ha cumplido todos los dias de la semana
+                    contador = 0;
+                }
+            }
+            for (int x = contador; x < 7; x++){
+                System.out.print("XX ");//dias sin numero se reemplazan por XX
+            }
+            System.out.println("");
+        }
+        else{
+            System.out.println("Elige un numero entre el 1 y el 7");
+        }
+    }
+     public boolean anagrama(String palabra1, String palabra2) {
+        palabra1 = palabra1.toUpperCase();
+        palabra2 = palabra2.toUpperCase();
+        palabra1 = quita(palabra1);
+        palabra2 = quita(palabra2);
+        if (palabra1.length() == palabra2.length()){ 
+            char [] string1 = palabra1.toCharArray();//pasa la string a arrays de caracteres
+            char [] string2 = palabra2.toCharArray();
+            Arrays.sort(string1);//coloca los caracteres de la array en orden ascendente
+            Arrays.sort(string2);
+            return (Arrays.equals(string1, string2));//compara
+        }
+        return false;
+    }
 
         
     
@@ -149,10 +195,23 @@ public class EjerciciosNivel01Java {
      */
     public static void main(String[] args) {
         EjerciciosNivel01Java ejercicio = new EjerciciosNivel01Java();
+         System.out.println("Maximo y segundo maximo:");
         System.out.println(Arrays.toString(ejercicio.maximo(ejercicio.listaNumeros)));
+        System.out.println("palindromo:");
         System.out.println(ejercicio.palindromo("ligar es ser agil"));
+        System.out.println("isograma:");
         System.out.println(ejercicio.isograma("murcielago"));
+        System.out.println("acronimo:");
         System.out.println(ejercicio.acronimo("murcielago demente monge arbitro"));
+        System.out.println("calendario");
+        ejercicio.imprimeMes(4);
+        
+        System.out.println("anagrama");
+        if (ejercicio.anagrama("cosa", "saco")){
+            System.out.println("Es un anagrama");
+        }
+       
+        
 
     }
 
