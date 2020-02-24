@@ -117,40 +117,29 @@ public class EjerciciosNivel01Java {
         return false;
     }
     
-    public String acronimo(String str){
-        str = str.toUpperCase();
-       String first= str.substring(0,1);
-         String auxiliar = "";
-         String de="de";
-         String la="la";
-         String y="y";
-         String e="e";
-         String las="las";
-         String completo="";
-         
-        for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == ' ') {
-                String primeraLetra= str.substring(i+1,i+2);
-                if(primeraLetra.equals(y)||primeraLetra.equals(e)){
-                
-                i=i+1;
+    public String acronimo(String frase){
+        try{
+            frase = frase.toUpperCase();
+            String[] arr=frase.split(" ");//convertir frase en array de palabras
+            String[] forbidden = {"Y", "E", "DE", "LA", "LAS"};//palabras prohibidas
+            String acronim = "";
+            for(int i=0;i<arr.length;i++){
+                boolean del = false;
+                for (int j = 0; j<forbidden.length;j++){
+                    if (arr[i].equals(forbidden[j]) && !del){
+                        del = true;//detector de si esa palabra hay que eliminarla o no
+                    }
                 }
-                String tresLetras= str.substring (i+1,i+4);
-                if(tresLetras.equals(las)){
-                    i=i+3;
+                if (!del){
+                    acronim += arr[i].charAt(0);
                 }
-                
-                String dosLetras= str.substring(i+1,i+3);
-                if(dosLetras.equals(la)||dosLetras.equals(de)){
-                    i=i+2;
-                }   
-               String second= str.substring(i+1,i+2);
-                completo= first+second;
             }
-             
-      
-            } 
-          return completo;  
+            return acronim;
+        }
+        catch(Exception e){
+            String error = "error al procesar la frase, comprueba que no haya espacios extra :D";
+            return error;
+        }
     }
 
         
@@ -163,7 +152,7 @@ public class EjerciciosNivel01Java {
         System.out.println(Arrays.toString(ejercicio.maximo(ejercicio.listaNumeros)));
         System.out.println(ejercicio.palindromo("ligar es ser agil"));
         System.out.println(ejercicio.isograma("murcielago"));
-        System.out.println(ejercicio.acronimo("murcielago dinamarca monge arbitro"));
+        System.out.println(ejercicio.acronimo("murcielago demente monge arbitro"));
 
     }
 
